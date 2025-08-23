@@ -1,0 +1,903 @@
+### System: I->R
+You are an extremely intelligent AI coding assistant. Please provide an accurate and reliable response to each user instruction. After delivering your response, verify its consistency and correctness by writing a series of executable tests.
+
+### System: C->I
+Create a series of independent coding tasks that are original, distinct, diverse, and high-quality, fostering logical thinking. Each task must adhere to specified properties:
+
+- category: the type of task (e.g., function implementation, class implementation, or program implementation)
+- language: the programming language to be used
+- difficulty: the complexity level of the task (e.g., easy, medium, or hard)
+- concepts: fundamental principles and techniques the task is designed to incorporate, which developers must understand to effectively solve the task
+
+Design the tasks so that the relevant concepts emerge naturally as the most appropriate solutions, without explicitly mentioning that a particular concept should be used.
+
+### System: S->C
+Extract key programming concepts from the provided code snippet. Programming concepts refer to the foundational principles and techniques used in programming, which are crucial for developers to master. List these concepts in a comma-separated format.
+
+### System: S->I
+Gain inspiration from the given code snippets and create a series of independent coding tasks that are original, distinct, diverse, and high-quality, fostering logical thinking.
+
+
+### Example 1
+[Code]
+#include <stdio.h>
+
+void printArray(int arr[], int size) {
+    for (int i = 0; i < size; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+void bubbleSort(int arr[], int size) {
+    for (int i = 0; i < size - 1; i++) {
+        for (int j = 0; j < size - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+[Property]
+category: function implementation
+language: C
+difficulty: medium
+concepts: array traversal, nested loops, bubble sort algorithm, basic I/O
+
+[Instruction]
+Implement a C program that performs the bubble sort algorithm on an array of integers. The program should define and call a function `bubbleSort` to sort the array in ascending order. Also, implement another function `printArray` to print the elements of the array before and after sorting.
+
+[Response]
+#include <stdio.h>
+
+void printArray(int arr[], int size) {
+    for (int i = 0; i < size; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+void bubbleSort(int arr[], int size) {
+    for (int i = 0; i < size - 1; i++) {
+        for (int j = 0; j < size - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+
+int main() {
+    int arr[] = {64, 34, 25, 12, 22, 11, 90};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    printf("Unsorted array: ");
+    printArray(arr, n);
+
+    bubbleSort(arr, n);
+
+    printf("Sorted array: ");
+    printArray(arr, n);
+
+    return 0;
+}
+[Tests]
+1. Input: `{64, 34, 25, 12, 22, 11, 90}`
+   Output:
+   ```
+   Unsorted array: 64 34 25 12 22 11 90
+   Sorted array: 11 12 22 25 34 64 90
+   ```
+2. Input: `{5, 2, 9, 1, 5, 6}`
+   Output:
+   ```
+   Unsorted array: 5 2 9 1 5 6
+   Sorted array: 1 2 5 5 6 9
+   ```
+
+### Example 2
+[Code]
+#include <stdio.h>
+
+int factorial(int n) {
+    if (n == 0) return 1;
+    return n * factorial(n - 1);
+}
+
+[Property]
+category: function implementation
+language: C
+difficulty: easy
+concepts: recursion, factorial calculation, base case handling
+
+[Instruction]
+Write a C program that calculates the factorial of a given number using recursion. The program should prompt the user for an integer input and print the factorial of that number.
+
+[Response]
+#include <stdio.h>
+
+int factorial(int n) {
+    if (n == 0) return 1;
+    return n * factorial(n - 1);
+}
+
+int main() {
+    int num;
+    printf("Enter a number: ");
+    scanf("%d", &num);
+
+    printf("Factorial of %d is %d\n", num, factorial(num));
+    return 0;
+}
+[Tests]
+1. Input: `5`
+   Output: `Factorial of 5 is 120`
+2. Input: `0`
+   Output: `Factorial of 0 is 1`
+
+### Example 3
+[Code]
+#include <stdio.h>
+
+void reverseString(char str[]) {
+    int len = 0, i;
+    while (str[len] != '\0') len++;
+    for (i = 0; i < len / 2; i++) {
+        char temp = str[i];
+        str[i] = str[len - i - 1];
+        str[len - i - 1] = temp;
+    }
+}
+
+[Property]
+category: function implementation
+language: C
+difficulty: medium
+concepts: string manipulation, character array traversal, swapping elements
+
+[Instruction]
+Implement a function in C that reverses a given string in place. The program should prompt the user for a string input, call the `reverseString` function, and display the reversed string.
+
+[Response]
+#include <stdio.h>
+
+void reverseString(char str[]) {
+    int len = 0, i;
+    while (str[len] != '\0') len++;
+    for (i = 0; i < len / 2; i++) {
+        char temp = str[i];
+        str[i] = str[len - i - 1];
+        str[len - i - 1] = temp;
+    }
+}
+
+int main() {
+    char str[100];
+    printf("Enter a string: ");
+    scanf("%s", str);
+
+    reverseString(str);
+    printf("Reversed string: %s\n", str);
+    return 0;
+}
+[Tests]
+1. Input: `"hello"`
+   Output: `Reversed string: olleh`
+2. Input: `"abcd"`
+   Output: `Reversed string: dcba`
+
+... (Remaining examples follow the same pattern for Examples 4 through 8)
+
+### Example 4
+[Code]
+#include <stdio.h>
+
+void countOccurrences(int arr[], int size, int target, int *count) {
+    *count = 0;
+    for (int i = 0; i < size; i++) {
+        if (arr[i] == target) {
+            (*count)++;
+        }
+    }
+}
+
+[Property]
+category: function implementation
+language: C
+difficulty: medium
+concepts: array traversal, pointers, counting occurrences
+
+[Instruction]
+Write a C program to count the occurrences of a specific number in an array. The program should define a function `countOccurrences` that takes an array, its size, the target number, and a pointer to store the count.
+
+[Response]
+#include <stdio.h>
+
+void countOccurrences(int arr[], int size, int target, int *count) {
+    *count = 0;
+    for (int i = 0; i < size; i++) {
+        if (arr[i] == target) {
+            (*count)++;
+        }
+    }
+}
+
+int main() {
+    int arr[] = {1, 2, 3, 4, 3, 2, 3};
+    int size = sizeof(arr) / sizeof(arr[0]);
+    int target = 3, count;
+
+    countOccurrences(arr, size, target, &count);
+
+    printf("The number %d occurs %d times in the array.\n", target, count);
+    return 0;
+}
+[Tests]
+1. Input: Array: `{1, 2, 3, 4, 3, 2, 3}`, Target: `3`
+   Output: `The number 3 occurs 3 times in the array.`
+2. Input: Array: `{5, 5, 5}`, Target: `5`
+   Output: `The number 5 occurs 3 times in the array.`
+
+### Example 5
+[Code]
+#include <stdio.h>
+#include <math.h>
+
+double computeDistance(double x1, double y1, double x2, double y2) {
+    return sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
+}
+
+[Property]
+category: function implementation
+language: C
+difficulty: easy
+concepts: math library, distance calculation, function with double inputs
+
+[Instruction]
+Write a C program to calculate the Euclidean distance between two points in a 2D space. The program should define a function `computeDistance` that takes the coordinates of the two points as input and returns the distance.
+
+[Response]
+#include <stdio.h>
+#include <math.h>
+
+double computeDistance(double x1, double y1, double x2, double y2) {
+    return sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
+}
+
+int main() {
+    double x1, y1, x2, y2;
+
+    printf("Enter coordinates of the first point (x1 y1): ");
+    scanf("%lf %lf", &x1, &y1);
+
+    printf("Enter coordinates of the second point (x2 y2): ");
+    scanf("%lf %lf", &x2, &y2);
+
+    printf("The distance between the points is %.2lf\n", computeDistance(x1, y1, x2, y2));
+    return 0;
+}
+[Tests]
+1. Input: `(0, 0), (3, 4)`
+   Output: `The distance between the points is 5.00`
+2. Input: `(1, 1), (4, 5)`
+   Output: `The distance between the points is 5.00`
+
+### Example 6
+[Code]
+#include <stdio.h>
+
+int binarySearch(int arr[], int size, int target) {
+    int left = 0, right = size - 1;
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+        if (arr[mid] == target) return mid;
+        else if (arr[mid] < target) left = mid + 1;
+        else right = mid - 1;
+    }
+    return -1;
+}
+
+[Property]
+category: function implementation
+language: C
+difficulty: medium
+concepts: binary search, sorted arrays, iterative search
+
+[Instruction]
+Write a C program to perform binary search on a sorted array. The program should define a function `binarySearch` that takes an array, its size, and the target element and returns the index of the target if found, otherwise -1.
+
+[Response]
+#include <stdio.h>
+
+int binarySearch(int arr[], int size, int target) {
+    int left = 0, right = size - 1;
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+        if (arr[mid] == target) return mid;
+        else if (arr[mid] < target) left = mid + 1;
+        else right = mid - 1;
+    }
+    return -1;
+}
+
+int main() {
+    int arr[] = {1, 3, 5, 7, 9, 11};
+    int size = sizeof(arr) / sizeof(arr[0]);
+    int target;
+
+    printf("Enter the number to search: ");
+    scanf("%d", &target);
+
+    int result = binarySearch(arr, size, target);
+
+    if (result != -1) {
+        printf("Number found at index %d\n", result);
+    } else {
+        printf("Number not found in the array\n");
+    }
+    return 0;
+}
+[Tests]
+1. Input: Array: `{1, 3, 5, 7, 9, 11}`, Target: `5`
+   Output: `Number found at index 2`
+2. Input: Array: `{1, 3, 5, 7, 9, 11}`, Target: `6`
+   Output: `Number not found in the array`
+
+
+
+
+
+
+### Example 7
+[Code]
+#include <stdio.h>
+
+void printArray(int arr[], int size) {
+    for (int i = 0; i < size; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+void bubbleSort(int arr[], int size) {
+    for (int i = 0; i < size - 1; i++) {
+        for (int j = 0; j < size - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+[Property]
+category: function implementation
+language: C
+difficulty: medium
+concepts: array traversal, nested loops, bubble sort algorithm, basic I/O
+
+[Instruction]
+Implement a C program that performs the bubble sort algorithm on an array of integers. The program should define and call a function `bubbleSort` to sort the array in ascending order. Also, implement another function `printArray` to print the elements of the array before and after sorting.
+
+[Response]
+#include <stdio.h>
+
+void printArray(int arr[], int size) {
+    for (int i = 0; i < size; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+void bubbleSort(int arr[], int size) {
+    for (int i = 0; i < size - 1; i++) {
+        for (int j = 0; j < size - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+
+int main() {
+    int arr[] = {64, 34, 25, 12, 22, 11, 90};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    printf("Unsorted array: ");
+    printArray(arr, n);
+
+    bubbleSort(arr, n);
+
+    printf("Sorted array: ");
+    printArray(arr, n);
+
+    return 0;
+}
+[Tests]
+1. Input: `{64, 34, 25, 12, 22, 11, 90}`
+   Output:
+   ```
+   Unsorted array: 64 34 25 12 22 11 90
+   Sorted array: 11 12 22 25 34 64 90
+   ```
+2. Input: `{5, 2, 9, 1, 5, 6}`
+   Output:
+   ```
+   Unsorted array: 5 2 9 1 5 6
+   Sorted array: 1 2 5 5 6 9
+   ```
+
+### Example 8
+[Code]
+#include <stdio.h>
+
+int factorial(int n) {
+    if (n == 0) return 1;
+    return n * factorial(n - 1);
+}
+
+[Property]
+category: function implementation
+language: C
+difficulty: easy
+concepts: recursion, factorial calculation, base case handling
+
+[Instruction]
+Write a C program that calculates the factorial of a given number using recursion. The program should prompt the user for an integer input and print the factorial of that number.
+
+[Response]
+#include <stdio.h>
+
+int factorial(int n) {
+    if (n == 0) return 1;
+    return n * factorial(n - 1);
+}
+
+int main() {
+    int num;
+    printf("Enter a number: ");
+    scanf("%d", &num);
+
+    printf("Factorial of %d is %d\n", num, factorial(num));
+    return 0;
+}
+[Tests]
+1. Input: `5`
+   Output: `Factorial of 5 is 120`
+2. Input: `0`
+   Output: `Factorial of 0 is 1`
+
+### Example 9
+[Code]
+#include <stdio.h>
+
+void reverseString(char str[]) {
+    int len = 0, i;
+    while (str[len] != '\0') len++;
+    for (i = 0; i < len / 2; i++) {
+        char temp = str[i];
+        str[i] = str[len - i - 1];
+        str[len - i - 1] = temp;
+    }
+}
+
+[Property]
+category: function implementation
+language: C
+difficulty: medium
+concepts: string manipulation, character array traversal, swapping elements
+
+[Instruction]
+Implement a function in C that reverses a given string in place. The program should prompt the user for a string input, call the `reverseString` function, and display the reversed string.
+
+[Response]
+#include <stdio.h>
+
+void reverseString(char str[]) {
+    int len = 0, i;
+    while (str[len] != '\0') len++;
+    for (i = 0; i < len / 2; i++) {
+        char temp = str[i];
+        str[i] = str[len - i - 1];
+        str[len - i - 1] = temp;
+    }
+}
+
+int main() {
+    char str[100];
+    printf("Enter a string: ");
+    scanf("%s", str);
+
+    reverseString(str);
+    printf("Reversed string: %s\n", str);
+    return 0;
+}
+[Tests]
+1. Input: `"hello"`
+   Output: `Reversed string: olleh`
+2. Input: `"abcd"`
+   Output: `Reversed string: dcba`
+
+
+### Example 10
+[Code]
+#include <stdio.h>
+
+int gcd(int a, int b) {
+    if (b == 0) return a;
+    return gcd(b, a % b);
+}
+
+[Property]
+category: function implementation
+language: C
+difficulty: medium
+concepts: recursion, Euclidean algorithm, greatest common divisor
+
+[Instruction]
+Implement a function in C to compute the greatest common divisor (GCD) of two integers using the Euclidean algorithm. The program should prompt the user to input two integers and output their GCD.
+
+[Response]
+#include <stdio.h>
+
+int gcd(int a, int b) {
+    if (b == 0) return a;
+    return gcd(b, a % b);
+}
+
+int main() {
+    int num1, num2;
+    printf("Enter two integers: ");
+    scanf("%d %d", &num1, &num2);
+
+    printf("GCD of %d and %d is %d\n", num1, num2, gcd(num1, num2));
+    return 0;
+}
+[Tests]
+1. Input: `12, 15`
+   Output: `GCD of 12 and 15 is 3`
+2. Input: `49, 7`
+   Output: `GCD of 49 and 7 is 7`
+
+### Example 11
+[Code]
+#include <stdio.h>
+
+void transposeMatrix(int matrix[3][3], int transposed[3][3]) {
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            transposed[j][i] = matrix[i][j];
+        }
+    }
+}
+
+[Property]
+category: function implementation
+language: C
+difficulty: medium
+concepts: 2D arrays, matrix transpose, nested loops
+
+[Instruction]
+Write a C program to compute the transpose of a 3x3 matrix. The program should define a function `transposeMatrix` and use it to transpose the matrix.
+
+[Response]
+#include <stdio.h>
+
+void transposeMatrix(int matrix[3][3], int transposed[3][3]) {
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            transposed[j][i] = matrix[i][j];
+        }
+    }
+}
+
+void printMatrix(int matrix[3][3]) {
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            printf("%d ", matrix[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    int matrix[3][3] = {
+        {1, 2, 3},
+        {4, 5, 6},
+        {7, 8, 9}
+    };
+    int transposed[3][3];
+
+    printf("Original Matrix:\n");
+    printMatrix(matrix);
+
+    transposeMatrix(matrix, transposed);
+
+    printf("Transposed Matrix:\n");
+    printMatrix(transposed);
+
+    return 0;
+}
+[Tests]
+Original Matrix:
+1 2 3
+4 5 6
+7 8 9
+
+Transposed Matrix:
+1 4 7
+2 5 8
+3 6 9
+
+### Example 12
+[Code]
+#include <stdio.h>
+
+int isPrime(int n) {
+    if (n <= 1) return 0;
+    for (int i = 2; i * i <= n; i++) {
+        if (n % i == 0) return 0;
+    }
+    return 1;
+}
+
+[Property]
+category: function implementation
+language: C
+difficulty: medium
+concepts: prime number check, loops, conditional statements
+
+[Instruction]
+Write a C program to check if a given number is a prime number. The program should define a function `isPrime` and prompt the user for input.
+
+[Response]
+#include <stdio.h>
+
+int isPrime(int n) {
+    if (n <= 1) return 0;
+    for (int i = 2; i * i <= n; i++) {
+        if (n % i == 0) return 0;
+    }
+    return 1;
+}
+
+int main() {
+    int num;
+    printf("Enter a number: ");
+    scanf("%d", &num);
+
+    if (isPrime(num)) {
+        printf("%d is a prime number\n", num);
+    } else {
+        printf("%d is not a prime number\n", num);
+    }
+    return 0;
+}
+[Tests]
+1. Input: `7`
+   Output: `7 is a prime number`
+2. Input: `10`
+   Output: `10 is not a prime number`
+
+### Example 13
+[Code]
+#include <stdio.h>
+
+int sumOfArray(int arr[], int size) {
+    if (size == 0) return 0;
+    return arr[size - 1] + sumOfArray(arr, size - 1);
+}
+
+[Property]
+category: function implementation
+language: C
+difficulty: easy
+concepts: recursion, array sum calculation
+
+[Instruction]
+Write a C program that calculates the sum of all elements in an array using recursion. The program should prompt the user to input the array elements.
+
+[Response]
+#include <stdio.h>
+
+int sumOfArray(int arr[], int size) {
+    if (size == 0) return 0;
+    return arr[size - 1] + sumOfArray(arr, size - 1);
+}
+
+int main() {
+    int arr[5];
+    printf("Enter 5 integers: ");
+    for (int i = 0; i < 5; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    printf("Sum of array elements: %d\n", sumOfArray(arr, 5));
+    return 0;
+}
+[Tests]
+1. Input: `1 2 3 4 5`
+   Output: `Sum of array elements: 15`
+2. Input: `10 20 30 40 50`
+   Output: `Sum of array elements: 150`
+
+### Example 14
+[Code]
+#include <stdio.h>
+
+void swap(int *a, int *b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+[Property]
+category: function implementation
+language: C
+difficulty: easy
+concepts: pointers, swapping variables, function with arguments
+
+[Instruction]
+Write a C program to swap two integers using pointers. The program should define a function `swap` and demonstrate swapping of variables in the main function.
+
+[Response]
+#include <stdio.h>
+
+void swap(int *a, int *b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+int main() {
+    int x, y;
+    printf("Enter two integers: ");
+    scanf("%d %d", &x, &y);
+
+    printf("Before swapping: x = %d, y = %d\n", x, y);
+    swap(&x, &y);
+    printf("After swapping: x = %d, y = %d\n", x, y);
+    return 0;
+}
+[Tests]
+1. Input: `10 20`
+   Output:
+   ```
+   Before swapping: x = 10, y = 20
+   After swapping: x = 20, y = 10
+   ```
+2. Input: `5 7`
+   Output:
+   ```
+   Before swapping: x = 5, y = 7
+   After swapping: x = 7, y = 5
+
+   ```
+
+### Example 15
+[Code]
+#include <stdio.h>
+
+void matrixAddition(int matrix1[2][2], int matrix2[2][2], int result[2][2]) {
+    for (int i = 0; i < 2; i++) {
+        for (int j = 0; j < 2; j++) {
+            result[i][j] = matrix1[i][j] + matrix2[i][j];
+        }
+    }
+}
+
+[Property]
+category: function implementation
+language: C
+difficulty: medium
+concepts: matrix operations, nested loops, 2D array manipulation
+
+[Instruction]
+Write a C program to perform the addition of two 2x2 matrices. The program should define a function `matrixAddition` that takes two matrices and a result matrix as input.
+
+[Response]
+#include <stdio.h>
+
+void matrixAddition(int matrix1[2][2], int matrix2[2][2], int result[2][2]) {
+    for (int i = 0; i < 2; i++) {
+        for (int j = 0; j < 2; j++) {
+            result[i][j] = matrix1[i][j] + matrix2[i][j];
+        }
+    }
+}
+
+void printMatrix(int matrix[2][2]) {
+    for (int i = 0; i < 2; i++) {
+        for (int j = 0; j < 2; j++) {
+            printf("%d ", matrix[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    int matrix1[2][2] = {{1, 2}, {3, 4}};
+    int matrix2[2][2] = {{5, 6}, {7, 8}};
+    int result[2][2];
+
+    matrixAddition(matrix1, matrix2, result);
+
+    printf("Resultant Matrix:\n");
+    printMatrix(result);
+    return 0;
+}
+[Tests]
+1. Input: Matrix1: `{{1, 2}, {3, 4}}`, Matrix2: `{{5, 6}, {7, 8}}`
+   Output: Resultant Matrix:
+   ```
+   6 8
+   10 12
+   ```
+2. Input: Matrix1: `{{0, 0}, {0, 0}}`, Matrix2: `{{1, 1}, {1, 1}}`
+   Output: Resultant Matrix:
+   ```
+   1 1
+   1 1
+   ```
+
+
+### Example 16
+[Code]
+#include <stdio.h>
+
+int countVowels(const char *str) {
+    int count = 0;
+    for (int i = 0; str[i] != '\0'; i++) {
+        char ch = str[i];
+        if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u' ||
+            ch == 'A' || ch == 'E' || ch == 'I' || ch == 'O' || ch == 'U') {
+            count++;
+        }
+    }
+    return count;
+}
+
+[Property]
+category: function implementation
+language: C
+difficulty: medium
+concepts: string traversal, vowel counting, character comparison
+
+[Instruction]
+Write a C program to count the number of vowels in a given string. The program should define a function `countVowels` that takes a string as input and returns the count of vowels.
+
+[Response]
+#include <stdio.h>
+
+int countVowels(const char *str) {
+    int count = 0;
+    for (int i = 0; str[i] != '\0'; i++) {
+        char ch = str[i];
+        if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u' ||
+            ch == 'A' || ch == 'E' || ch == 'I' || ch == 'O' || ch == 'U') {
+            count++;
+        }
+    }
+    return count;
+}
+
+int main() {
+    char str[100];
+    printf("Enter a string: ");
+    scanf("%s", str);
+
+    printf("Number of vowels: %d\n", countVowels(str));
+    return 0;
+}
+[Tests]
+1. Input: `"hello"`
+   Output: `Number of vowels: 2`
+2. Input: `"AEIOUaeiou"`
+   Output: `Number of vowels: 10`
+
